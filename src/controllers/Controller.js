@@ -8,7 +8,7 @@ class Controller {
             const recordList = await this.entity.getAllRecords();
             return res.status(200).json(recordList);
         } catch (error) {
-            return res.status(500).json({ mensagem: 'Erro no servidor' });
+            return res.status(500).json({ erro: error.message });
         }
     }
 
@@ -18,7 +18,7 @@ class Controller {
             const aRecord = await this.entity.getRecordById(Number(id));
             return res.status(200).json(aRecord);
         } catch (error) {
-            return res.status(500).json({ mensagem: 'Erro no servidor' });
+            return res.status(500).json({ erro: error.message });
         }
     }
 
@@ -28,7 +28,7 @@ class Controller {
             const records = await this.entity.getRecordsByCriteria(criteria);
             return res.status(200).json(records);
         } catch (error) {
-            return res.status(500).json({ mensagem: 'Erro no servidor' });
+            return res.status(500).json({ erro: error.message });
         }
     }
 
@@ -38,7 +38,7 @@ class Controller {
             const createdRecord = await this.entity.createRecord(newRecord);
             return res.status(201).json(createdRecord);
         } catch (error) {
-            return res.status(500).json({ mensagem: 'Erro no servidor' });
+            return res.status(500).json({ erro: error.message });
         }
     }
 
@@ -48,11 +48,11 @@ class Controller {
         try {
             const updatedRecord = await this.entity.updateRecord(updatedInfo, Number(id));
             if (!updatedRecord) {
-                return res.status(404).json({ mensagem: 'Resgistro não encontrado' });
+                return res.status(404).json({ erro: 'Resgistro não encontrado' });
             }
             return res.status(200).json({ mensagem: `Registro ${id} atualizado com sucesso` });
         } catch (error) {
-            return res.status(500).json({ mensagem: 'Erro no servidor' });
+            return res.status(500).json({ erro: error.message });
         }
     }
 
@@ -61,11 +61,11 @@ class Controller {
         try {
             const deletedRecord = await this.entity.deleteRecord(Number(id));
             if (!deletedRecord) {
-                return res.status(404).json({ mensagem: 'Resgistro não encontrado' });
+                return res.status(404).json({ erro: 'Resgistro não encontrado' });
             }
             return res.status(200).json({ mensagem: `Registro ${id} deletado com sucesso` });
         } catch (error) {
-            return res.status(500).json({ mensagem: 'Erro no servidor' });
+            return res.status(500).json({ erro: error.message });
         }
     }
 }

@@ -8,6 +8,7 @@ const enrollmentController = new EnrollmentController();
 const router = Router();
 
 router.get('/pessoas', (req, res) => personController.getAllEntities(req, res));
+router.get('/pessoas/todos', (req, res) => personController.getAllPeople(req, res));
 router.get('/pessoas/:id', (req, res) => personController.getEntityById(req, res));
 router.post('/pessoas', (req, res) => personController.createEntity(req, res));
 router.put('/pessoas/:id', (req, res) => personController.updateEntity(req, res));

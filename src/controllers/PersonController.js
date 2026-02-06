@@ -16,6 +16,15 @@ class PersonController extends Controller {
             return res.status(500).json(error.message);
         }
     }
+
+    async getAllPeople(req, res) {
+        try {
+            const listAllPeople = await personService.getScopeAllPeople();
+            return res.status(200).json(listAllPeople);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }   
 }
 
 module.exports = PersonController;

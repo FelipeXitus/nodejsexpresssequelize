@@ -4,6 +4,7 @@ class CourseService extends Services {
     constructor() {
         super('Course');
     }
+
 }
 
 module.exports = CourseService;

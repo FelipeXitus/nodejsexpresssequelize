@@ -21,6 +21,10 @@ class Services {
         return dataSource[this.model].findOne({ where: { ...criteria } });
     }
 
+    async getRecordsByParams(params) {
+        return dataSource[this.model].findAll({ where: { ...params } });
+    }
+
     async createRecord(data) {
         return dataSource[this.model].create(data);
     }

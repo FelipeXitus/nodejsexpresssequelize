@@ -15,7 +15,7 @@ class PersonController extends Controller {
         } catch (error) {
             return res.status(500).json({ erro: error.message });
         }
-    }
+    } 
 
     async getEnrolledClasses(req, res) {
         const { estudante_id } = req.params;

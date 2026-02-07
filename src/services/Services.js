@@ -22,7 +22,15 @@ class Services {
     }
 
     async getRecordsByParams(params) {
-        return dataSource[this.model].findAll({ where: { ...params } });
+        return dataSource[this.model].findAll({ 
+            where: { ...params },
+            limit: 3,
+            order: [['id', 'DESC']]
+        });
+    }
+
+    async getCountRecordsByParams(params) {
+        return dataSource[this.model].findAndCountAll({ where: { ...params } });
     }
 
     async createRecord(data) {

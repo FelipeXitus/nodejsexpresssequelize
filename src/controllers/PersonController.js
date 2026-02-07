@@ -34,7 +34,17 @@ class PersonController extends Controller {
         } catch (error) {
             return res.status(500).json({ erro: error.message });
         }
-    }   
+    }
+    
+    async cancelPersonResgistration(req, res) {
+        const { estudante_id } = req.params;
+        try {
+            await personService.cancelPersonAndEnrollment(Number(estudante_id));
+            return res.status(200).json({ message: `Matrícula do estudante ${estudante_id} cancelada com sucesso!` });
+        } catch (error) {
+            return res.status(500).json({ erro: error.message });
+        }
+    }
 }
 
 module.exports = PersonController;

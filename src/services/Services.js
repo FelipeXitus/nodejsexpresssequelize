@@ -21,25 +21,22 @@ class Services {
         return dataSource[this.model].findOne({ where: { ...criteria } });
     }
 
-    async getRecordsByParams(params) {
-        return dataSource[this.model].findAll({ 
-            where: { ...params },
-            limit: 3,
-            order: [['id', 'DESC']]
-        });
+    async getRecordsByParams(options) {
+        return dataSource[this.model].findAll({ ...options });
     }
 
-    async getCountRecordsByParams(params) {
-        return dataSource[this.model].findAndCountAll({ where: { ...params } });
+    async getCountRecordsByParams(options) {
+        return dataSource[this.model].findAndCountAll({ ...options });
     }
 
     async createRecord(data) {
         return dataSource[this.model].create(data);
     }
 
-    async updateRecord(data, where) {
+    async updateRecord(data, where, transaction = {}) {
         const listRecordUpdated = await dataSource[this.model].update(data, {
-            where: { ...where }
+            where: { ...where },
+            transaction: transaction
         });
         if (listRecordUpdated[0] === 0) {
             return false;

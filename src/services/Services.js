@@ -17,13 +17,17 @@ class Services {
         return dataSource[this.model].findByPk(id);
     }
 
+    async getRecordByCriteria(criteria) {
+        return dataSource[this.model].findOne({ where: { ...criteria } });
+    }
+
     async createRecord(data) {
         return dataSource[this.model].create(data);
     }
 
-    async updateRecord(data, id) {
+    async updateRecord(data, where) {
         const listRecordUpdated = await dataSource[this.model].update(data, {
-            where: { id: id }
+            where: { ...where }
         });
         if (listRecordUpdated[0] === 0) {
             return false;
@@ -31,9 +35,9 @@ class Services {
         return true;
     }
 
-    async deleteRecord(id) {
+    async deleteRecord(where) {
         const listRecordDeleted = await dataSource[this.model].destroy({
-            where: { id: id }
+            where: { ...where }
         });
         if (listRecordDeleted === 0) {
             return false;

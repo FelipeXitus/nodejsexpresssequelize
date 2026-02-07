@@ -7,13 +7,23 @@ class PersonController extends Controller {
         super(personService);
     }
 
-    async getEnrolledClasses(req, res) {
-        const { studentId } = req.params;
+    async getActiveEnrolledClasses(req, res) {
+        const { estudante_id } = req.params;
         try {
-            const listEnrolledClasses = await personService.getEnrolledByStudent(Number(studentId));
+            const listEnrolledClasses = await personService.getActiveEnrolledByStudent(Number(estudante_id));
             return res.status(200).json(listEnrolledClasses);
         } catch (error) {
-            return res.status(500).json(error.message);
+            return res.status(500).json({ erro: error.message });
+        }
+    }
+
+    async getEnrolledClasses(req, res) {
+        const { estudante_id } = req.params;
+        try {
+            const listEnrolledClasses = await personService.getEnrolledByStudent(Number(estudante_id));
+            return res.status(200).json(listEnrolledClasses);
+        } catch (error) {
+            return res.status(500).json({ erro: error.message });
         }
     }
 
@@ -22,7 +32,7 @@ class PersonController extends Controller {
             const listAllPeople = await personService.getScopeAllPeople();
             return res.status(200).json(listAllPeople);
         } catch (error) {
-            return res.status(500).json(error.message);
+            return res.status(500).json({ erro: error.message });
         }
     }   
 }

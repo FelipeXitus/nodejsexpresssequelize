@@ -5,9 +5,15 @@ class PersonService extends Services {
         super('Person');
     }
 
-    async getEnrolledByStudent(studentId) {
+    async getActiveEnrolledByStudent(studentId) {
         const student = await super.getRecordById(studentId);
         const listEnrolledClasses = await student.getAulasMatriculadas();
+        return listEnrolledClasses;
+    }
+
+    async getEnrolledByStudent(studentId) {
+        const student = await super.getRecordById(studentId);
+        const listEnrolledClasses = await student.getTodasMatriculas();
         return listEnrolledClasses;
     }
 
@@ -15,6 +21,7 @@ class PersonService extends Services {
         const listAllPeople = await super.getRecordsByScope('allPeople');
         return listAllPeople;
     }
+
 }
 
 module.exports = PersonService;
